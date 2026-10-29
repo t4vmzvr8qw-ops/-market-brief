@@ -1,25 +1,25 @@
-# Market Brief — Morning Movers
+# Market Brief — GitHub Pages (Version 3, trustworthy sources)
 
-Mobile-friendly, static morning market news briefing. GitHub Actions fetches recent Google News RSS headlines and deploys the briefing to GitHub Pages. Earnings take priority, with US and European sources and macro/company catalyst fallback. No API key required.
+Static morning-brief dashboard: **Top 5 above the detailed feed**, Earnings-first prioritization, personal browser watchlist, source attribution, date/time and filters.
 
-## Deploy
+## Source integrity
 
-1. Create a **public** repository on GitHub (e.g., `market-brief`).
-2. Upload **all files and folders** from this project to the repository root, retaining `.github/workflows/pages.yml`, and use branch `main`.
-3. Under **Settings → Pages → Build and deployment**, select **GitHub Actions** as the source.
-4. Under **Actions → Update Morning Brief → Run workflow**, start the first update. The GitHub Pages URL will appear under Settings → Pages / deployment.
+- Only articles whose Google News RSS **publisher label exactly matches** the allowed editorial outlets: Reuters, Bloomberg, Financial Times, The Wall Street Journal, CNBC, Associated Press/AP News, Handelsblatt or Dow Jones Newswires. Google News is only a discovery mechanism; linking may point to Google News redirects.
+- Optional SEC EDGAR official filings for US companies listed in `config/watchlist.json`. These show **filing metadata, not claimed financial performance**. A US 8-K is labeled earnings only when Item 2.02 is present; 10-Q/10-K/20-F use their official form labels. European coverage currently uses reliable editorial outlets, not European regulatory filings.
+- No fabricated EPS, consensus surprises, outlook shifts, equity price moves, investor implications or AI summaries. When the feed has no reliable excerpt, the UI shows only the headline plus link; no speculative bullet-point padding.
+- Exact publisher names in an RSS feed are **not independently authenticated** against the destination URL. Articles still require opening and checking the underlying source for investment decisions.
+- Coverage is **not comprehensive**; restricted sources and paywalls may limit detail.
 
-Updates are requested at `05:17`, `06:17`, `07:17`, `08:17`, `09:17`, `10:17` UTC on weekdays. This corresponds to 07:17–12:17 during Central European summer time, 06:17–11:17 during winter time. GitHub schedules are best effort and may be delayed. Use **Actions → Run workflow** anytime to refresh the deployed snapshot.
+## Install
 
-## What it does / limitations
+1. Upload all files including `.github/workflows/pages.yml`, `scripts/update_news.py`, `data/news.json` and `config/watchlist.json` into the **repository root**, not a nested directory.
+2. Repository **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+3. **Actions → Update Morning Brief → Run workflow**. Scheduled every weekday several times in the early Frankfurt morning (UTC hours 05–10).
+4. Optional SEC filings: add a repo Actions secret `SEC_USER_AGENT` with a legitimate identifying application name **and your contact email address**, e.g. `MarketBrief your-contact@example.com`; do not use placeholder. Edit `config/watchlist.json` with US stock ticker strings such as `"MSFT"` and `"NVDA"`, commit, run workflow. Without the secret the SEC fetch is skipped. Browser watchlist is a local filter; it does not launch remote searches.
+5. When updating an existing repo, replace files at root. If only `pages-build-deployment` appears under Actions, check that the `.github/workflows/pages.yml` file exists on `main`.
 
-- Fetches public Google News RSS **headlines**, filters for earnings and market-moving terms, ranks and deduplicates results, and displays up to 13 earnings and 7 other stories from the past 30 hours.
-- The categorization, regional tags, and priority indicators are *heuristic*, not proof of market movement. Regional tags indicate the target search feed, not validated company headquarters or listing market.
-- Links go to Google News article URLs. Stories may link to paywalled outlets. Neither full articles nor market prices are collected. Titles are presented in their original language, primarily English, sometimes German.
-- Google News RSS is not a contractual API and can change or become unavailable. If all feeds fail, the workflow errors rather than overwriting the prior data. Existing deployed data persists from the last successful deployment.
-- This is **not** a verified earnings calendar, not equity return attribution, and not a comprehensive feed. Professional-grade financial data would require reliable licensed feeds and potentially paid API credentials kept in GitHub Actions secrets.
-- GitHub Pages websites are public; do not put private API keys in browser files or `data/news.json`.
+## Limitations
 
-## Local preview
-
-Run `python3 -m http.server 8000` in the project directory and open `http://localhost:8000`. For live data, run `python3 scripts/update_news.py` before previewing.
+- No API key required for editorial feeds; SEC requires contact-bearing User-Agent as a secret. No cross-device sync. GitHub Actions schedule may be delayed or skipped; the dashboard shows the last update. The priority rules are simple heuristics, **not a materiality or investment score**.
+- **Actual vs consensus, price response, professional event summaries and Europe official filings are not implemented**; add them only with licensed/verifiable data sources.
+- The script keeps the previous JSON if all fetches fail. Initial `data/news.json` has no stories; run the workflow before expecting results.
