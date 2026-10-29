@@ -1,0 +1,28 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b1220" />
+  <meta name="description" content="Market Brief – die wichtigsten Earnings und Market Mover für deinen Morgen." />
+  <title>Market Brief — Morning Movers</title>
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="rail" aria-label="Navigation"><div class="brand-mark" title="Market Brief">M<span>·</span></div><div class="rail-line"></div><div class="rail-text">MORNING INTELLIGENCE</div><div class="rail-bottom">US <span>↗</span> EU</div></aside>
+    <main class="main">
+      <header class="topbar"><div class="top-left"><span class="status-dot"></span><span>MARKET BRIEF</span><span class="divider">/</span><span class="muted">MORNING EDITION</span></div><div class="top-right"><span id="clock">FRANKFURT · --:--</span><button id="themeButton" class="icon-button" title="Farbschema wechseln" aria-label="Farbschema wechseln">◐</button></div></header>
+      <div class="content">
+        <section class="hero"><div class="eyebrow"><span class="tiny-square"></span> YOUR DAILY EDGE <span class="eyebrow-line"></span> <span id="edition">EUROPE / UNITED STATES</span></div><div class="hero-row"><div><h1>Good morning<span class="period">.</span></h1><p class="subtitle">Was heute die Märkte bewegt. Ohne Rauschen.</p></div><div class="date-panel"><div id="weekday">—</div><strong id="date">—</strong><small>EUROPE / BERLIN</small></div></div></section>
+        <section class="overview" aria-label="Überblick"><div class="overview-header"><span>THE BRIEFING</span><span class="live-indicator"><span class="green-dot"></span><span id="freshness">DATEN WERDEN GELADEN</span></span></div><div class="overview-body"><div><div class="metric" id="count">—</div><div class="metric-label">RELEVANTE MELDUNGEN</div></div><div><div class="metric" id="earningsCount">—</div><div class="metric-label">EARNINGS</div></div><div><div class="metric" id="otherCount">—</div><div class="metric-label">ANDERE KATALYSATOREN</div></div><div class="overview-note" id="overviewNote">Fokus auf Quartalszahlen, Guidance und kursrelevante Unternehmensmeldungen aus den USA und Europa.</div></div></section>
+        <section class="feed-section"><div class="section-top"><div><div class="section-kicker">01 / THE SIGNAL</div><h2>Today's movers<span class="period">.</span></h2></div><div class="filters" role="group" aria-label="Nachrichten filtern"><button class="filter active" data-filter="all" aria-pressed="true">Alle <span id="filterAllCount">0</span></button><button class="filter" data-filter="earnings" aria-pressed="false">Earnings <span id="filterEarningsCount">0</span></button><button class="filter" data-filter="other" aria-pressed="false">Other movers <span id="filterOtherCount">0</span></button></div></div><div id="feed" class="feed" aria-live="polite"><div class="empty"><div class="empty-symbol">↗</div><h3>Briefing wird geladen</h3><p>Aktuelle Headlines werden vorbereitet.</p></div></div><div class="feed-footer"><span id="updated">LETZTES UPDATE: —</span><button id="refresh" class="text-button">↻ Neu laden</button></div></section>
+        <section class="bottom-grid"><div class="about-card"><div class="section-kicker">02 / HOW IT WORKS</div><h3>Signal over noise.</h3><p>Priorisiert Earnings, Prognoseänderungen und andere potenzielle Kurstreiber. Jede Meldung verlinkt zur Quelle. Kein erfundener Kursimpact, keine künstlichen Zusammenfassungen.</p><div class="tag-row"><span>US + EUROPE</span><span>QUARTERLY EARNINGS</span><span>MARKET CATALYSTS</span></div></div><div class="source-card"><div class="section-kicker">YOUR MORNING ROUTINE</div><div class="source-clock">07<span>:</span>00 <small>CET / CEST</small></div><p>Automatische Aktualisierungen werktags am Morgen. GitHub Actions bereitet die Nachrichten vor – die Website funktioniert ohne API-Key im Browser.</p></div></section>
+        <footer>MARKET BRIEF <span>© <span id="year"></span> · RESEARCH STARTS HERE, NOT INVESTMENT ADVICE.</span></footer>
+      </div>
+    </main>
+  </div>
+  <script src="./app.js" defer></script>
+</body>
+</html>
